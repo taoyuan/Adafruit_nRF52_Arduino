@@ -59,6 +59,7 @@ uint32_t setLoopStacksize(void);
   #include "utility/SoftwareTimer.h"
 
   #include "Uart.h"
+
 #endif
 
 #include "delay.h"
@@ -91,14 +92,26 @@ uint32_t setLoopStacksize(void);
 #undef abs
 #endif // abs
 
-#define min(a,b) ((a)<(b)?(a):(b))
-#define max(a,b) ((a)>(b)?(a):(b))
+#define _min(a,b) ((a)<(b)?(a):(b))
+#define _max(a,b) ((a)>(b)?(a):(b))
 #define abs(x) ((x)>0?(x):-(x))
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
-#define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
+// #define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 #define radians(deg) ((deg)*DEG_TO_RAD)
 #define degrees(rad) ((rad)*RAD_TO_DEG)
 #define sq(x) ((x)*(x))
+
+#ifdef __cplusplus
+
+#include <algorithm>
+#include <cmath>  
+using std::isinf;
+using std::isnan;
+using std::max;
+using std::min;
+using ::round;
+
+#endif
 
 #define interrupts() __enable_irq()
 #define noInterrupts() __disable_irq()
